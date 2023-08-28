@@ -5,12 +5,12 @@ export const playerSlice = createSlice({
     initialState: {
         position: 0,
         money: 200,
-        figure: 'none',
+        figure: [],
         boughtStreets: []
     },
     reducers: {
         chooseFigure: (state, action) => {
-            state.figure = action.payload;
+            state.figure.push(action.payload);
         },
         updatePosition: (state, action) => {
             state.position += action.payload;
