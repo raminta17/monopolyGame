@@ -13,7 +13,10 @@ export const playerSlice = createSlice({
             state.figure = action.payload;
         },
         updatePosition: (state, action) => {
-            state.position += action.payload;
+            state.position = action.payload;
+            // let totalPositionCheck = state.position+action.payload;
+            // if(totalPositionCheck >=24) return state.position = totalPositionCheck % 24;
+
         },
         addMoney: (state, action) => {
             state.money += action.payload;

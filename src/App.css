@@ -60,9 +60,14 @@
 .figuresCont img {
     width: 100px;
 }
+.gamePage {
+    display: flex;
+    gap:10px;
+}
 .gameBoard {
     background-color: var(--mainGameColor);
     box-shadow: var(--border-shadow);
+    position: relative;
     width: 90vh;
     height: 90vh;
     display: grid;
@@ -74,8 +79,13 @@
                        ' div18 empty empty empty empty empty div8'
                        ' div17 empty empty empty empty empty div9'
                         'div16 empty empty empty empty empty div10'
-                        'divrest2 div15 div14 div13 div12 div11 divrest3';
+                        'divrest3 div15 div14 div13 div12 div11 divrest2';
     gap:3px;
+}
+.diceCont {
+    position:absolute;
+    left: 50%;
+    top: 50%;
 }
 .gameDiv {
     box-shadow:0 0 0 3px black;
@@ -90,6 +100,40 @@
     width: 100%;
     height: 20px;
 }
-.price {
-    color: darkgreen;
+.playerCard {
+    background-color: var(--mainGameColor);
+    box-shadow: var(--border-shadow);
+    padding: 10px;
+    border-radius: 20px;
+    height: fit-content;
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.boughtStreet {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap:10px;
+    border-radius: 10px;
+    align-items: center;
+    margin:5px 0;
+    opacity: 0.8;
+}
+.boughtStreet:hover {
+opacity: 1;
+    box-shadow: var(--border-shadow);
+}
+.boughtStreet button {
+    padding: 5px;
+    background-color: var(--background);
+    border-radius: 10px;
+}
+.diceImg {
+    width: 50px;
+}
+.playerFigure {
+    width: 50px;
 }
