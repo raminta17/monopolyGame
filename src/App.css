@@ -19,8 +19,8 @@
 }
 .startGame {
     background-color: var(--mainGameColor);
-    width: 60%;
-    height: 60vh;
+    width: 80vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -30,13 +30,17 @@
     padding: 20px;
     box-shadow: var(--border-shadow);
 }
+.startGame:hover .monopoly{
+    transform: scale(1.1);
+}
 .monopoly {
     color: white;
     border: 4px solid white;
-    background: rgb(252,0,0);
-    background: linear-gradient(184deg, rgba(252,0,0,1) 38%, rgba(182,182,186,1) 100%, rgba(240,9,44,0.4963235294117647) 100%);
+    background: rgb(241,6,6);
+    background: linear-gradient(180deg, rgba(241,6,6,1) 33%, rgba(83,3,17,0.7764355742296919) 100%);
     padding: 5px 15px;
     box-shadow: var(--border-shadow);
+    transition: 1s ease-in-out;
 }
 .figuresCont {
     width: 80%;
@@ -44,7 +48,48 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    gap: 10px;
 }
-img {
+.figuresCont div {
+    border-radius: 20px;
+    transition: 0.3s ease-in-out;
+}
+.figuresCont div:hover {
+    box-shadow: var(--border-shadow);
+}
+.figuresCont img {
     width: 100px;
+}
+.gameBoard {
+    background-color: var(--mainGameColor);
+    box-shadow: var(--border-shadow);
+    width: 90vh;
+    height: 90vh;
+    display: grid;
+    grid-template-columns: 3fr repeat(5,2fr) 3fr;
+    grid-template-rows: 3fr repeat(5,2fr) 3fr;
+    grid-template-areas: 'divstart div1 div2 div3 div4 div5 divrest1'
+                        'div20 empty empty empty empty empty div6'
+                       ' div19 empty empty empty empty empty div7'
+                       ' div18 empty empty empty empty empty div8'
+                       ' div17 empty empty empty empty empty div9'
+                        'div16 empty empty empty empty empty div10'
+                        'divrest2 div15 div14 div13 div12 div11 divrest3';
+    gap:3px;
+}
+.gameDiv {
+    box-shadow:0 0 0 3px black;
+    word-break: break-word;
+    font-size: small;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.streetColor {
+    width: 100%;
+    height: 20px;
+}
+.price {
+    color: darkgreen;
 }
