@@ -70,8 +70,8 @@
     width: 60vw;
     height: 90vh;
     display: grid;
-    grid-template-columns: 3fr repeat(5, 2fr) 3fr;
-    grid-template-rows: 3fr repeat(5, 2fr) 3fr;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
     grid-template-areas: 'boxstart box1 box2 box3 box4 box5 boxrest1'
                         'box20 centre centre centre centre centre box6'
                        ' box19 centre centre centre centre centre box7'
@@ -101,8 +101,9 @@
 }
 
 .activeCard {
-    background: rgb(0, 0, 0);
-    background: linear-gradient(184deg, rgba(0, 0, 0, 0.468312324929972) 0%, rgba(0, 0, 0, 0.7764355742296919) 100%);
+
+    background: linear-gradient(184deg, rgba(0, 0, 0, 0.168312324929972) 0%, rgba(0, 0, 0, 0.2764355742296919) 100%);
+    animation: active 6s ease infinite;
     position: absolute;
     top: 0;
     display: flex;
@@ -115,13 +116,8 @@
     transition: 0.3s ease-in-out;
 }
 
-.activeCard:hover {
-    background-color: grey;
-    color: green;
-}
-
 .activeCard:hover .buyBtn, .activeCard:hover .price, .activeCard:hover .playerFigure {
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 .streetColor {
@@ -173,6 +169,7 @@
     width: 50px;
     margin: auto;
     transition: 0.3s ease-in-out;
+    animation: pulse 2s infinite alternate linear;
 }
 
 .boardCentre {
@@ -194,6 +191,17 @@
     border: 5px solid black;
     box-shadow: var(--border-shadow);
     transition: 0.3s ease-in-out;
+    animation: pulse 2s infinite alternate linear;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(100%);
+    }
+    to {
+        transform: scale(120%);
+    }
+
 }
 
 .rollBtn:hover {
@@ -212,9 +220,11 @@
     transition: 0.3s ease-in-out;
     color: white;
 }
+
 .error {
     height: 20px;
 }
+
 .sellBtn {
     width: 40%;
     background-color: green;
@@ -224,13 +234,16 @@
     transition: 0.3s ease-in-out;
 
 }
-#start,#rest1, #rest2, #rest3 {
+
+#start, #rest1, #rest2, #rest3 {
     font-weight: bold;
     font-size: 1.8em;
 }
+
 #start {
     color: red;
 }
+
 .owned {
     color: green;
     font-size: large;
