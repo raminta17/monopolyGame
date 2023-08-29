@@ -5,7 +5,7 @@ import {addStreet, subtractMoney} from "../features/player";
 
 
 const GameBoard = () => {
-    const player = useSelector(state=> state.player);
+    const player = useSelector(state => state.player);
     const dispatch = useDispatch();
     const gameBoard = [
         {
@@ -152,20 +152,22 @@ const GameBoard = () => {
 
     function buyStreet(name) {
         let boughtStreet = gameBoard.find((street) => street.name === name);
-        if(player.money >= boughtStreet.price && !player.boughtStreets.some(street=> street.name === boughtStreet.name)) {
+        if (player.money >= boughtStreet.price && !player.boughtStreets.some(street => street.name === boughtStreet.name)) {
             dispatch(subtractMoney(boughtStreet.price))
             dispatch(addStreet(boughtStreet));
         }
-        if(player.money < boughtStreet.price) return setError('NOT ENOUGH MONEY')
+        if (player.money < boughtStreet.price) return setError('NOT ENOUGH MONEY')
     }
+
     return (
         <div className="gameBoard">
-            {gameBoard.map((gameDiv,index) => {
+            {gameBoard.map((gameDiv, index) => {
+                let streetSelected = player.boughtStreets.some(street => street.name === gameDiv.name);
                 return <div
                     key={index}
-                    style={{gridArea: 'div'+gameDiv.id}}
-                    className={`gameDiv` }
-                    id={index}
+                    style={{gridArea: 'box' + gameDiv.id}}
+                    className="gameDiv"
+                    id={gameDiv.id}
                 >
                     <div>
                         {'color' in gameDiv && <div className="streetColor" style={{backgroundColor: gameDiv.color}}>
@@ -173,18 +175,19 @@ const GameBoard = () => {
                         <h4>{gameDiv.name}</h4>
                         {player.position === index &&
                             <div className="activeCard" onClick={() => buyStreet(gameDiv.name)}>
-                                {'price' in gameDiv && player.position === index && !player.boughtStreets.some(street=> street.name === gameDiv.name) &&
+                                {'price' in gameDiv && player.position === index && !streetSelected &&
                                     <button className="buyBtn">BUY</button>}
                                 <img className="playerFigure" src={player.figure.image}/>
-                                {'price' in gameDiv && !player.boughtStreets.some(street=> street.name === gameDiv.name) && <h5 className="price">{gameDiv.price}$</h5>}
+                                {'price' in gameDiv && !streetSelected && <h5 className="price">{gameDiv.price}$</h5>}
                             </div>
-                          }
+                        }
                     </div>
-                    {'price' in gameDiv && <h5 className="price">{!player.boughtStreets.some(street=> street.name === gameDiv.name) ? gameDiv.price+'$' : 'OWNED'}</h5>}
+                    {'price' in gameDiv && <h5 className="price">{!streetSelected ? gameDiv.price + '$' : 'OWNED'}</h5>}
                 </div>
             })}
-            <div className="boardCentre" style={{gridArea: 'empty'}}>
-                <img className="monopoly" src="https://i.pinimg.com/originals/2c/48/75/2c48755938d4e51ca8f76ced8b3912af.png" alt=""/>
+            <div className="boardCentre" style={{gridArea: 'centre'}}>
+                <img className="monopoly"
+                     src="https://i.pinimg.com/originals/2c/48/75/2c48755938d4e51ca8f76ced8b3912af.png" alt=""/>
                 <div className="error">{error && error}</div>
                 <Dice setError={setError}/>
             </div>

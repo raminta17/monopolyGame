@@ -8,14 +8,13 @@ const PlayerCard = () => {
     const dispatch = useDispatch();
 
     function sellStreet(street) {
-        console.log(street)
         dispatch(addMoney(street.price / 2))
         dispatch(removeStreet(street.name))
     }
 
     return (
         <div className="playerCard">
-            <h3>MONEY: {player.money}$</h3>
+            <h3>YOUR MONEY: {player.money}$</h3>
             <div>
                 {player.boughtStreets.map((street, index) =>
                     <div className="boughtStreet" style={{backgroundColor: street.color}} key={index}>

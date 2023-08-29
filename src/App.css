@@ -72,13 +72,13 @@
     display: grid;
     grid-template-columns: 3fr repeat(5, 2fr) 3fr;
     grid-template-rows: 3fr repeat(5, 2fr) 3fr;
-    grid-template-areas: 'divstart div1 div2 div3 div4 div5 divrest1'
-                        'div20 empty empty empty empty empty div6'
-                       ' div19 empty empty empty empty empty div7'
-                       ' div18 empty empty empty empty empty div8'
-                       ' div17 empty empty empty empty empty div9'
-                        'div16 empty empty empty empty empty div10'
-                        'divrest3 div15 div14 div13 div12 div11 divrest2';
+    grid-template-areas: 'boxstart box1 box2 box3 box4 box5 boxrest1'
+                        'box20 centre centre centre centre centre box6'
+                       ' box19 centre centre centre centre centre box7'
+                       ' box18 centre centre centre centre centre box8'
+                       ' box17 centre centre centre centre centre box9'
+                        'box16 centre centre centre centre centre box10'
+                        'boxrest3 box15 box14 box13 box12 box11 boxrest2';
     gap: 3px;
 }
 
@@ -117,6 +117,7 @@
 
 .activeCard:hover {
     background-color: grey;
+    color: green;
 }
 
 .activeCard:hover .buyBtn, .activeCard:hover .price, .activeCard:hover .playerFigure {
@@ -217,5 +218,13 @@
 .sellBtn {
     width: 40%;
 }
+#start,#rest1, #rest2, #rest3 {
+    font-weight: bold;
+    font-size: 1.8em;
+}
+#start {
+    color: red;
+}
+
 
 

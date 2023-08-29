@@ -1,11 +1,13 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {chooseFigure} from "../features/player";
 
 
 const StartGamePage = () => {
     const dispatch = useDispatch();
+    const nav = useNavigate();
+
     const playerFigures = [
         {
             name: 'wheelbarrow',
@@ -40,10 +42,9 @@ const StartGamePage = () => {
             image: 'https://www.geekslop.com/wp-content/uploads/2022/04/Scotty.png'
         }
     ]
-    const nav = useNavigate();
 
     function startGame(chosenIndex) {
-        const chosenFigure = playerFigures.find((figure,index)=> index === chosenIndex);
+        const chosenFigure = playerFigures.find((figure, index) => index === chosenIndex);
         dispatch(chooseFigure(chosenFigure))
         nav("/game")
     }
@@ -51,7 +52,8 @@ const StartGamePage = () => {
     return (
         <div className="startGame">
             <div>
-                <img className="monopoly" src="https://i.pinimg.com/originals/2c/48/75/2c48755938d4e51ca8f76ced8b3912af.png" alt=""/>
+                <img className="monopoly"
+                     src="https://i.pinimg.com/originals/2c/48/75/2c48755938d4e51ca8f76ced8b3912af.png" alt=""/>
             </div>
             <div><h4>CHOOSE YOUR FIGURE TO START THE GAME</h4></div>
             <div className="figuresCont">
