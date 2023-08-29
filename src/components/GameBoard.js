@@ -182,7 +182,9 @@ const GameBoard = () => {
                             </div>
                         }
                     </div>
-                    {'price' in gameDiv && <h5 className="price">{!streetSelected ? gameDiv.price + '$' : 'OWNED'}</h5>}
+                    {'price' in gameDiv && !streetSelected && <h5 className="price">{gameDiv.price}$</h5>}
+                    {'price' in gameDiv && streetSelected && <h5 className="price owned">OWNED</h5>}
+                    {/*{'price' in gameDiv && <h5 className="price">{!streetSelected ? gameDiv.price + '$' : 'OWNED'}</h5>}*/}
                 </div>
             })}
             <div className="boardCentre" style={{gridArea: 'centre'}}>
