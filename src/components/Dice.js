@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {updatePosition, addMoney} from "../features/player";
 
 
-const Dice = () => {
+const Dice = ({setError}) => {
 
     const dice = [
         {
@@ -35,6 +35,7 @@ const Dice = () => {
     const dispatch = useDispatch();
     const player = useSelector(state=>state.player);
     function rollDice() {
+        setError();
         let randomNum = Math.floor(Math.random()*6)+1;
         let position = player.position + randomNum;
         setRolledValue(randomNum);
@@ -50,7 +51,7 @@ const Dice = () => {
             <div>
                 {rolledValue && <img className="diceImg" src={dice[rolledValue-1].image}/>}
             </div>
-            <button onClick={rollDice}>ROLL DICE</button>
+            <button className="rollBtn" onClick={rollDice}>ROLL DICE</button>
         </div>
     );
 };

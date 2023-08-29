@@ -50,8 +50,8 @@ const StartGamePage = () => {
 
     return (
         <div className="startGame">
-            <div className="monopoly">
-                <h1>MONOPOLY</h1>
+            <div>
+                <img className="monopoly" src="https://i.pinimg.com/originals/2c/48/75/2c48755938d4e51ca8f76ced8b3912af.png" alt=""/>
             </div>
             <div><h4>CHOOSE YOUR FIGURE TO START THE GAME</h4></div>
             <div className="figuresCont">

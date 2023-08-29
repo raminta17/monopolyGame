@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Dice from "./Dice";
 import {useDispatch, useSelector} from "react-redux";
 import {addStreet, subtractMoney} from "../features/player";
@@ -148,15 +148,15 @@ const GameBoard = () => {
 
 
     ]
-    console.log(player.boughtStreets);
+    const [error, setError] = useState();
 
     function buyStreet(name) {
         let boughtStreet = gameBoard.find((street) => street.name === name);
-        if(player.money >= boughtStreet.price) {
+        if(player.money >= boughtStreet.price && !player.boughtStreets.some(street=> street.name === boughtStreet.name)) {
             dispatch(subtractMoney(boughtStreet.price))
             dispatch(addStreet(boughtStreet));
         }
-
+        if(player.money < boughtStreet.price) return setError('NOT ENOUGH MONEY')
     }
     return (
         <div className="gameBoard">
@@ -164,24 +164,31 @@ const GameBoard = () => {
                 return <div
                     key={index}
                     style={{gridArea: 'div'+gameDiv.id}}
-                    className="gameDiv"
+                    className={`gameDiv` }
                     id={index}
                 >
                     <div>
-                        {'color' in gameDiv && <div className="streetColor" style={{backgroundColor: gameDiv.color}}></div>}
+                        {'color' in gameDiv && <div className="streetColor" style={{backgroundColor: gameDiv.color}}>
+                        </div>}
                         <h4>{gameDiv.name}</h4>
                         {player.position === index &&
-                            <div>
+                            <div className="activeCard" onClick={() => buyStreet(gameDiv.name)}>
+                                {'price' in gameDiv && player.position === index && !player.boughtStreets.some(street=> street.name === gameDiv.name) &&
+                                    <button className="buyBtn">BUY</button>}
                                 <img className="playerFigure" src={player.figure.image}/>
-                                {/*neveikia tikrinimas ar yra tokia jau nupirkta gatve*/}
-                                {'price' in gameDiv && !player.boughtStreets.some(street=> street.name === gameDiv.street) && <button onClick={() =>buyStreet(gameDiv.name)}>BUY</button>}
+                                {'price' in gameDiv && !player.boughtStreets.some(street=> street.name === gameDiv.name) && <h5 className="price">{gameDiv.price}$</h5>}
                             </div>
                           }
                     </div>
-                    {'price' in gameDiv && <h5 className="price">{gameDiv.price}$</h5>}
+                    {'price' in gameDiv && <h5 className="price">{!player.boughtStreets.some(street=> street.name === gameDiv.name) ? gameDiv.price+'$' : 'OWNED'}</h5>}
                 </div>
             })}
-            <Dice/>
+            <div className="boardCentre" style={{gridArea: 'empty'}}>
+                <img className="monopoly" src="https://i.pinimg.com/originals/2c/48/75/2c48755938d4e51ca8f76ced8b3912af.png" alt=""/>
+                <div className="error">{error && error}</div>
+                <Dice setError={setError}/>
+            </div>
+
         </div>
     );
 };

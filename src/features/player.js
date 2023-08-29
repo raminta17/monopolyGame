@@ -28,7 +28,7 @@ export const playerSlice = createSlice({
             state.boughtStreets.push(action.payload);
         },
         removeStreet: (state, action) => {
-            state.boughtStreets = state.boughtStreets.filter(street => street.id !== action.payload);
+            state.boughtStreets = state.boughtStreets.filter(street => street.name !== action.payload);
         }
     }
 })
