@@ -30,11 +30,16 @@ const GameBoard = () => {
             color: "Green",
             price: 30
         },
+        // {
+        //     id: '4',
+        //     name: "Pinecrest Road",
+        //     color: "Yellow",
+        //     price: 40
+        // },
         {
             id: '4',
-            name: "Pinecrest Road",
-            color: "Yellow",
-            price: 40
+            name: "INCOME TAX",
+            cost: 200
         },
         {
             id: '5',
@@ -150,6 +155,9 @@ const GameBoard = () => {
     ]
     const [error, setError] = useState();
 
+    const taxBox = gameBoard.find(street => 'cost' in street);
+
+
     function buyStreet(name) {
         let boughtStreet = gameBoard.find((street) => street.name === name);
         if (player.money >= boughtStreet.price && !player.boughtStreets.some(street => street.name === boughtStreet.name)) {
@@ -161,6 +169,7 @@ const GameBoard = () => {
 
     return (
         <div className="gameBoard">
+
             {gameBoard.map((gameDiv, index) => {
                 let streetSelected = player.boughtStreets.some(street => street.name === gameDiv.name);
                 return <div
@@ -182,16 +191,16 @@ const GameBoard = () => {
                             </div>
                         }
                     </div>
+                    {'cost' in gameDiv && <h3>{gameDiv.cost}$</h3>}
                     {'price' in gameDiv && !streetSelected && <h5 className="price">{gameDiv.price}$</h5>}
                     {'price' in gameDiv && streetSelected && <h5 className="price owned">OWNED</h5>}
-                    {/*{'price' in gameDiv && <h5 className="price">{!streetSelected ? gameDiv.price + '$' : 'OWNED'}</h5>}*/}
                 </div>
             })}
             <div className="boardCentre" style={{gridArea: 'centre'}}>
                 <img className="monopoly"
                      src="https://i.pinimg.com/originals/2c/48/75/2c48755938d4e51ca8f76ced8b3912af.png" alt=""/>
                 <div className="error">{error && error}</div>
-                <Dice setError={setError}/>
+                <Dice setError={setError} taxBox={taxBox}/>
             </div>
 
         </div>

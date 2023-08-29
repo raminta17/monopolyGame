@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {updatePosition, addMoney} from "../features/player";
+import {updatePosition, addMoney, subtractMoney} from "../features/player";
 
 
-const Dice = ({setError}) => {
+const Dice = ({setError, taxBox}) => {
 
     const dice = [
         {
@@ -42,6 +42,9 @@ const Dice = ({setError}) => {
         if(position >=24) {
            position = position % 24;
            dispatch(addMoney(200))
+        }
+        if(position === Number(taxBox.id)) {
+            dispatch(subtractMoney(taxBox.cost))
         }
         dispatch(updatePosition(position))
     }
