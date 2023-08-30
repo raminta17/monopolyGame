@@ -1,10 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Dice from "./Dice";
 import BoardSquare from "./BoardSquare";
+import {useDispatch, useSelector} from "react-redux";
+import {startNewGame} from "../features/player";
+import {useNavigate} from "react-router-dom";
 
 
 const GameBoard = () => {
-
+    const nav = useNavigate();
+    const dispatch = useDispatch();
+    const player = useSelector(state => state.player);
     const gameBoard = [
         {
             id: 'start',
@@ -152,10 +157,21 @@ const GameBoard = () => {
 
 
     ]
-    const [error, setError] = useState();
+    const [error, setError] = useState('COLLECT ALL STREETS TO WIN THE GAME.');
 
     const taxBoxes = gameBoard.filter(street => 'cost' in street);
     const chanceSquares = gameBoard.filter(square => 'chance' in square);
+
+    useEffect(() => {
+        const allStreets = gameBoard.filter(box => 'price' in box);
+        if(allStreets.length === player.boughtStreets.length) {
+            dispatch(startNewGame('newGame'))
+            nav("/gameWon")
+        }
+        else {
+            console.log(player.boughtStreets.length);
+        }
+    }, [player.boughtStreets]);
 
 
     return (
@@ -175,6 +191,7 @@ const GameBoard = () => {
                      src="https://i.pinimg.com/originals/2c/48/75/2c48755938d4e51ca8f76ced8b3912af.png" alt=""/>
                 <div className="error">{error && error}</div>
                 <Dice error={error} setError={setError} taxBoxes={taxBoxes} chanceSquares={chanceSquares}/>
+                <h3>{player.boughtStreets.length}/{gameBoard.filter(box => 'price' in box).length}</h3>
             </div>
 
         </div>

@@ -27,7 +27,7 @@ export const playerSlice = createSlice({
         removeStreet: (state, action) => {
             state.boughtStreets = state.boughtStreets.filter(street => street.name !== action.payload);
         },
-        startNewGame: (state, action) => {
+        startNewGame: (state,action) => {
             state.position = 0;
             state.money = 200;
             state.boughtStreets = [];

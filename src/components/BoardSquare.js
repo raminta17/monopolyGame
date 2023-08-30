@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {addStreet, subtractMoney} from "../features/player";
 import {useDispatch, useSelector} from "react-redux";
 
@@ -16,6 +16,7 @@ const BoardSquare = ({gameDiv, index, gameBoard, setError}) => {
         }
         if (player.money < boughtStreet.price) return setError('NOT ENOUGH MONEY')
     }
+
     return (
         <div
             style={{gridArea: 'box' + gameDiv.id}}

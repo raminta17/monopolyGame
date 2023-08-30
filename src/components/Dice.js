@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {updatePosition, addMoney, subtractMoney} from "../features/player";
+import {updatePosition, addMoney, subtractMoney, startNewGame} from "../features/player";
 import {useNavigate} from "react-router-dom";
 
 
@@ -60,7 +60,7 @@ const Dice = ({error, setError, taxBoxes, chanceSquares}) => {
                         setError(`YOU WON ${randomChance}$!`)
                     }
                     if (randomChance < 0) {
-                        dispatch(subtractMoney(randomChance))
+                        dispatch(subtractMoney(Math.abs(randomChance)))
                         setError(`YOU LOST ${Math.abs(randomChance)}$. BETTER LUCK NEXT TIME`);
 
                     }
@@ -74,9 +74,9 @@ const Dice = ({error, setError, taxBoxes, chanceSquares}) => {
     }
 
     useEffect(() => {
-        console.log(player.money);
         if (player.money < 0) {
-            nav("/gameOver")
+            dispatch(startNewGame('newGame'))
+            nav("/gameLost")
         }
     }, [player.money]);
     return (
