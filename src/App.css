@@ -72,13 +72,13 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(7, 1fr);
-    grid-template-areas: 'boxstart box1 box2 box3 box4 box5 boxrest1'
-                        'box20 centre centre centre centre centre box6'
-                       ' box19 centre centre centre centre centre box7'
-                       ' box18 centre centre centre centre centre box8'
-                       ' box17 centre centre centre centre centre box9'
-                        'box16 centre centre centre centre centre box10'
-                        'boxrest3 box15 box14 box13 box12 box11 boxrest2';
+    grid-template-areas: 'boxstart box1 box2 box3 box4 box5 box6'
+                        'box23 centre centre centre centre centre box7'
+                       ' box22 centre centre centre centre centre box8'
+                       ' box21 centre centre centre centre centre box9'
+                       ' box20 centre centre centre centre centre box10'
+                        'box19 centre centre centre centre centre box11'
+                        'box18 box17 box16 box15 box14 box13 box12';
     gap: 3px;
 }
 
@@ -101,7 +101,6 @@
 }
 
 .activeCard {
-
     background: linear-gradient(184deg, rgba(0, 0, 0, 0.168312324929972) 0%, rgba(0, 0, 0, 0.2764355742296919) 100%);
     animation: active 6s ease infinite;
     position: absolute;
@@ -235,7 +234,7 @@
 
 }
 
-#start, #rest1, #rest2, #rest3 {
+#start, #rest {
     font-weight: bold;
     font-size: 1.8em;
 }
@@ -247,6 +246,19 @@
 .owned {
     color: green;
     font-size: large;
+}
+.gameOver {
+    background-color: var(--mainGameColor);
+    box-shadow: var(--border-shadow);
+    border-radius: 20px;
+    text-align: center;
+    padding: 30px;
+    width: 50vw;
+}
+.gameOverBtn {
+    background-color: yellow;
+    margin: 20px;
+    cursor: pointer;
 }
 
 

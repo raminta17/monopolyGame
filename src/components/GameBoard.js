@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
 import Dice from "./Dice";
-import {useDispatch, useSelector} from "react-redux";
-import {addStreet, subtractMoney} from "../features/player";
+import BoardSquare from "./BoardSquare";
 
 
 const GameBoard = () => {
-    const player = useSelector(state => state.player);
-    const dispatch = useDispatch();
+
     const gameBoard = [
         {
             id: 'start',
@@ -48,104 +46,105 @@ const GameBoard = () => {
             price: 50
         },
         {
-            id: 'rest1',
-            name: 'REST'
+            id: '6',
+            name: 'CHANCE',
+            chance: 100
         },
         {
-            id: '6',
+            id: '7',
             name: "Willowside Boulevard",
             color: "Orange",
             price: 55
         },
         {
-            id: '7',
+            id: '8',
             name: "Birchwood Avenue",
             color: "Pink",
             price: 60
         },
         {
-            id: '8',
+            id: '9',
             name: "Cedar Court",
             color: "Brown",
             price: 65
         },
         {
-            id: '9',
+            id: '10',
             name: "Elmwood Way",
             color: "Gray",
             price: 70
         },
         {
-            id: '10',
+            id: '11',
             name: "Rosewood Terrace",
             color: "Cyan",
             price: 75
         },
 
         {
-            id: 'rest2',
+            id: '12',
             name: 'REST'
         },
         {
-            id: '11',
+            id: '13',
             name: "Sycamore Road",
             color: "Magenta",
             price: 80
         },
         {
-            id: '12',
+            id: '14',
             name: "Lakeshore Lane",
             color: "Turquoise",
             price: 90
         },
         {
-            id: '13',
+            id: '15',
             name: "Juniper Street",
             color: "Lime",
             price: 100
         },
         {
-            id: '14',
+            id: '16',
             name: "Hawthorn Avenue",
             color: "Indigo",
             price: 110
         },
         {
-            id: '15',
+            id: '17',
             name: "Riverfront Drive",
             color: "Teal",
             price: 120
         },
         {
-            id: 'rest3',
-            name: 'REST'
+            id: '18',
+            name: 'CHANCE',
+            chance: 100
         },
         {
-            id: '16',
+            id: '19',
             name: "Redwood Ridge Road",
             color: "Olive",
             price: 125
         },
         {
-            id: '17',
+            id: '20',
             name: "Aspen Grove Lane",
             color: "Maroon",
             price: 130
         },
         {
-            id: '18',
+            id: '21',
             name: "Magnolia Avenue",
             color: "Silver",
             price: 140
         },
         {
-            id: '19',
-            name: "Oakridge Terrace",
-            color: "Gold",
-            price: 145
+            id: '22',
+            name: "INCOME TAX",
+            cost: 200
         },
         {
-            id: '20',
+            id: '23',
             name: "Willowbrook Street",
             color: "Navy",
             price: 150
@@ -155,52 +154,27 @@ const GameBoard = () => {
     ]
     const [error, setError] = useState();
 
-    const taxBox = gameBoard.find(street => 'cost' in street);
+    const taxBoxes = gameBoard.filter(street => 'cost' in street);
+    const chanceSquares = gameBoard.filter(square => 'chance' in square);
 
-
-    function buyStreet(name) {
-        let boughtStreet = gameBoard.find((street) => street.name === name);
-        if (player.money >= boughtStreet.price && !player.boughtStreets.some(street => street.name === boughtStreet.name)) {
-            dispatch(subtractMoney(boughtStreet.price))
-            dispatch(addStreet(boughtStreet));
-        }
-        if (player.money < boughtStreet.price) return setError('NOT ENOUGH MONEY')
-    }
 
     return (
         <div className="gameBoard">
-
             {gameBoard.map((gameDiv, index) => {
-                let streetSelected = player.boughtStreets.some(street => street.name === gameDiv.name);
-                return <div
+              return  <BoardSquare
                     key={index}
-                    style={{gridArea: 'box' + gameDiv.id}}
-                    className="gameDiv"
-                    id={gameDiv.id}
-                >
-                    <div>
-                        {'color' in gameDiv && <div className="streetColor" style={{backgroundColor: gameDiv.color}}>
-                        </div>}
-                        <h4>{gameDiv.name}</h4>
-                        {player.position === index &&
-                            <div className="activeCard" onClick={() => buyStreet(gameDiv.name)}>
-                                {'price' in gameDiv && player.position === index && !streetSelected &&
-                                    <button className="buyBtn">BUY</button>}
-                                <img className="playerFigure" src={player.figure.image}/>
-                                {'price' in gameDiv && !streetSelected && <h5 className="price">{gameDiv.price}$</h5>}
-                            </div>
-                        }
-                    </div>
-                    {'cost' in gameDiv && <h3>{gameDiv.cost}$</h3>}
-                    {'price' in gameDiv && !streetSelected && <h5 className="price">{gameDiv.price}$</h5>}
-                    {'price' in gameDiv && streetSelected && <h5 className="price owned">OWNED</h5>}
-                </div>
+                    index={index}
+                    gameDiv={gameDiv}
+                    gameBoard={gameBoard}
+                    setError={setError}
+                />
+
             })}
             <div className="boardCentre" style={{gridArea: 'centre'}}>
                 <img className="monopoly"
                      src="https://i.pinimg.com/originals/2c/48/75/2c48755938d4e51ca8f76ced8b3912af.png" alt=""/>
                 <div className="error">{error && error}</div>
-                <Dice setError={setError} taxBox={taxBox}/>
+                <Dice error={error} setError={setError} taxBoxes={taxBoxes} chanceSquares={chanceSquares}/>
             </div>
 
         </div>
