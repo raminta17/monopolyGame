@@ -168,11 +168,14 @@ const GameBoard = () => {
             dispatch(startNewGame('newGame'))
             nav("/gameWon")
         }
-        else {
-            console.log(player.boughtStreets.length);
-        }
     }, [player.boughtStreets]);
 
+    useEffect(() => {
+        if (player.money < 0) {
+            dispatch(startNewGame('newGame'))
+            nav("/gameLost")
+        }
+    }, [player.money]);
 
     return (
         <div className="gameBoard">
@@ -191,7 +194,7 @@ const GameBoard = () => {
                      src="https://i.pinimg.com/originals/2c/48/75/2c48755938d4e51ca8f76ced8b3912af.png" alt=""/>
                 <div className="error">{error && error}</div>
                 <Dice error={error} setError={setError} taxBoxes={taxBoxes} chanceSquares={chanceSquares}/>
-                <h3>{player.boughtStreets.length}/{gameBoard.filter(box => 'price' in box).length}</h3>
+                <h3>{player.boughtStreets.length}/{gameBoard.filter(box => 'price' in box).length} STREETS OWNED</h3>
             </div>
 
         </div>

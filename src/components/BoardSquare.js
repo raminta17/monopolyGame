@@ -21,7 +21,7 @@ const BoardSquare = ({gameDiv, index, gameBoard, setError}) => {
         <div
             style={{gridArea: 'box' + gameDiv.id}}
             className="gameDiv"
-            id={gameDiv.id}
+            id={gameDiv.name}
         >
             <div>
                 {'color' in gameDiv && <div className="streetColor" style={{backgroundColor: gameDiv.color}}>
@@ -36,12 +36,11 @@ const BoardSquare = ({gameDiv, index, gameBoard, setError}) => {
                     </div>
                 }
             </div>
+            {'chance' in gameDiv && <h2>?</h2>}
             {'cost' in gameDiv && <h3>{gameDiv.cost}$</h3>}
             {'price' in gameDiv && !streetSelected && <h5 className="price">{gameDiv.price}$</h5>}
             {'price' in gameDiv && streetSelected && <h5 className="price owned">OWNED</h5>}
         </div>
-
-
     );
 };
 

@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {updatePosition, addMoney, subtractMoney, startNewGame} from "../features/player";
-import {useNavigate} from "react-router-dom";
 
 
 const Dice = ({error, setError, taxBoxes, chanceSquares}) => {
-    const nav = useNavigate();
+
     const dice = [
         {
             dice: 1,
@@ -62,7 +61,6 @@ const Dice = ({error, setError, taxBoxes, chanceSquares}) => {
                     if (randomChance < 0) {
                         dispatch(subtractMoney(Math.abs(randomChance)))
                         setError(`YOU LOST ${Math.abs(randomChance)}$. BETTER LUCK NEXT TIME`);
-
                     }
                     if (randomChance === 0) {
                         setError('NOTHING TO WIN, NOTHING TO LOSE')
@@ -73,19 +71,11 @@ const Dice = ({error, setError, taxBoxes, chanceSquares}) => {
         dispatch(updatePosition(position))
     }
 
-    useEffect(() => {
-        if (player.money < 0) {
-            dispatch(startNewGame('newGame'))
-            nav("/gameLost")
-        }
-    }, [player.money]);
     return (
         <div className="diceCont">
             <div>
                 {rolledValue && <img className="diceImg" src={dice[rolledValue - 1].image}/>}
             </div>
-            {/*{error === `YOU LOST ALL YOUR MONEY.` ? <button className="gameOverBtn rollBtn">START NEW GAME</button>*/}
-            {/*    : <button className="rollBtn" onClick={rollDice}>ROLL DICE</button>}*/}
             <button className="rollBtn" onClick={rollDice}>ROLL DICE</button>
         </div>
     );

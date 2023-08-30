@@ -3,11 +3,10 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {chooseFigure} from "../features/player";
 
-
 const StartGamePage = () => {
+
     const dispatch = useDispatch();
     const nav = useNavigate();
-
     const playerFigures = [
         {
             name: 'wheelbarrow',
@@ -58,7 +57,6 @@ const StartGamePage = () => {
             <div><h4>CHOOSE YOUR FIGURE TO START THE GAME</h4></div>
             <div className="figuresCont">
                 {playerFigures.map((figures, index) =>
-
                     <div onClick={() => startGame(index)} key={index}>
                         <img src={figures.image}/>
                     </div>

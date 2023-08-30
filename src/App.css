@@ -185,7 +185,7 @@
 
 .rollBtn {
     padding: 10px;
-    background-color: green;
+    background-color: #03a603;
     border-radius: 10px;
     border: 5px solid black;
     box-shadow: var(--border-shadow);
@@ -234,12 +234,12 @@
 
 }
 
-#start, #rest {
+#START, #REST {
     font-weight: bold;
     font-size: 1.8em;
 }
 
-#start {
+#START {
     color: red;
 }
 
@@ -260,6 +260,9 @@
     margin: 20px;
     cursor: pointer;
 }
-
+#CHANCE {
+    font-size: 1.5em;
+    color: #0505cc;
+}
 
 
