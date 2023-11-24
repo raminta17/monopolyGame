@@ -35,10 +35,6 @@ const StartGamePage = () => {
         {
             name: 'car',
             image: 'https://i0.wp.com/www.actionfigureinsider.com/wpress/wp-content/uploads/2022/05/Car.png?fit=800%2C640'
-        },
-        {
-            name: 'dog',
-            image: 'https://www.geekslop.com/wp-content/uploads/2022/04/Scotty.png'
         }
     ]
 
