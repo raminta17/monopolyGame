@@ -35,18 +35,18 @@ const BoardSquare = ({ gameDiv, index, gameBoard, setError }) => {
 					></div>
 				)}
 				<h4>{gameDiv.name}</h4>
-				{player.position === index && (
-					<div className='activeCard' onClick={() => buyStreet(gameDiv.name)}>
-						{'price' in gameDiv &&
-							player.position === index &&
-							!streetSelected && <button className='buyBtn'>BUY</button>}
-						<img className='playerFigure' src={player.figure.image} />
-						{'price' in gameDiv && !streetSelected && (
-							<h5 className='price'>{gameDiv.price}$</h5>
-						)}
-					</div>
-				)}
 			</div>
+			{player.position === index && (
+				<div className='activeCard' onClick={() => buyStreet(gameDiv.name)}>
+					{'price' in gameDiv &&
+						player.position === index &&
+						!streetSelected && <button className='buyBtn'>BUY</button>}
+					<img className='playerFigure' src={player.figure.image} />
+					{'price' in gameDiv && !streetSelected && (
+						<h5 className='price'>{gameDiv.price}$</h5>
+					)}
+				</div>
+			)}
 			{'chance' in gameDiv && (
 				<h2>
 					<i className='fa-solid fa-dice'></i>

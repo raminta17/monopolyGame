@@ -296,9 +296,9 @@ main {
 	#REST {
 		justify-content: center;
 	}
-	#CHANCE div,
-	#START div,
-	#REST div {
+	#CHANCE div:first-child,
+	#START div:first-child,
+	#REST div:first-child {
 		display: none;
 	}
 	.gamePage {
