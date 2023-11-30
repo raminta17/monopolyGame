@@ -105,6 +105,7 @@ main {
 	flex-direction: column;
 	justify-content: space-between;
 	position: relative;
+	height: 13vh;
 }
 
 .activeCard {

@@ -191,6 +191,7 @@ const GameBoard = () => {
 					setError={setError}
 					taxBoxes={taxBoxes}
 					chanceSquares={chanceSquares}
+					gameBoard={gameBoard}
 				/>
 				<h3>
 					{player.boughtStreets.length}/
